@@ -7,12 +7,14 @@ public class move : MonoBehaviour
 {
     public float speed;
     public int objects;
-
-    private Rigidbody rb;
-    private int count;
     public Text countText;
     public Text winText;
     public Text LoseText;
+
+    private Rigidbody rb;
+    private int count;
+    private bool isjumping = false;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +31,23 @@ public class move : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        float moveJump = 0;// Input.GetAxis("Jump");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        if (Input.GetKeyDown(KeyCode.Space) && !isjumping)
+        {
+            moveJump = 10;
+            isjumping = true;
+        }
+
+        if (rb.velocity.y == 0) isjumping = false;
+
+        Vector3 movement = new Vector3(moveHorizontal, moveJump, moveVertical);
 
         rb.AddForce(movement * speed);
 
+        Debug.Log(rb.velocity.ToString());
+
+       // rb.velocity
         if(rb.position.y < -2.588)
         {
             LoseText.text = "Game over!";
@@ -47,6 +61,24 @@ public class move : MonoBehaviour
             other.gameObject.SetActive(false);
             count++;
             SetCountText();
+        }
+        if (other.gameObject.CompareTag("PickUpRed"))
+        {
+            other.gameObject.SetActive(false);
+            count++;
+            speed += 6;
+            SetCountText();
+        }
+        if (other.gameObject.CompareTag("PickUpBlue"))
+        {
+            other.gameObject.SetActive(false);
+            count++;
+            speed -= 4;
+            SetCountText();
+        }
+        if (other.gameObject.CompareTag("wind"))
+        {
+            
         }
     }
 

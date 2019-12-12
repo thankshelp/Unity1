@@ -7,6 +7,7 @@ TagManager:
   - PickUp
   - PickUpRed
   - PickUpBlue
+  - wind
   layers:
   - Default
   - TransparentFX
