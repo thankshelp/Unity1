@@ -31,21 +31,24 @@ public class move : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        float moveJump = 0;// Input.GetAxis("Jump");
+        //float moveJump = 0;// Input.GetAxis("Jump");
 
+        
         if (Input.GetKeyDown(KeyCode.Space) && !isjumping)
         {
-            moveJump = 10;
+            float speedJump = 10;
+            Vector3 movementj = new Vector3(0.0f, 20, 0.0f);
+            rb.AddForce(movementj * speedJump);
             isjumping = true;
         }
 
         if (rb.velocity.y == 0) isjumping = false;
 
-        Vector3 movement = new Vector3(moveHorizontal, moveJump, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal,0.0f, moveVertical);
 
         rb.AddForce(movement * speed);
 
-        Debug.Log(rb.velocity.ToString());
+        //Debug.Log(rb.velocity.ToString());
 
        // rb.velocity
         if(rb.position.y < -2.588)
@@ -76,9 +79,26 @@ public class move : MonoBehaviour
             speed -= 4;
             SetCountText();
         }
-        if (other.gameObject.CompareTag("wind"))
+
+        if (other.gameObject.CompareTag("windUp"))
         {
-            
+            float moveVertical = 30;
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float speedUp = 50;
+
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+            rb.AddForce(movement * speedUp);
+        }
+        if (other.gameObject.CompareTag("windDown"))
+        {
+            float moveVertical = -30;
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float speedUp = 50;
+
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+            rb.AddForce(movement * speedUp);
         }
     }
 
