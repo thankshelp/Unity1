@@ -228,7 +228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 475.01, y: -317}
+  m_AnchoredPosition: {x: 390, y: -211.5}
   m_SizeDelta: {x: 168.4, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &323581662
@@ -403,7 +403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 470, y: -520.25}
+  m_AnchoredPosition: {x: 383.01, y: -347.2}
   m_SizeDelta: {x: 286.9, y: 35.399994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604908716
@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 729857950}
   - component: {fileID: 729857949}
   - component: {fileID: 729857953}
+  - component: {fileID: 729857954}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -558,6 +559,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad471ace9c477842995f4d191899f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBar: {fileID: 1613923521}
+  text: {fileID: 604908714}
+--- !u!114 &729857954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729857948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be069e16656229f4db6e3fd9f97654f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 1613923521}
@@ -939,8 +954,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 475.00317, y: -567}
-  m_SizeDelta: {x: 950.01, y: 58.100006}
+  m_AnchoredPosition: {x: 383.01, y: -393.95}
+  m_SizeDelta: {x: 766.02, y: 58.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613923521
 MonoBehaviour:

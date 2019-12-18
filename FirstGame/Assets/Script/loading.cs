@@ -4,42 +4,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class InGameMenu : MonoBehaviour
+
+public class loading : MonoBehaviour
 {
+
     public Slider progressBar;
     public GameObject text;
-
     // Start is called before the first frame update
-    public void ShowMenu(GameObject menu)
+    void Start()
     {
-        menu.SetActive(true);
-        Time.timeScale = 0f;
+        int lvl = PlayerPrefs.GetInt("nextLVL", 1);
+        StartCoroutine(LoadLevelAsinc(lvl));
     }
 
-    // Update is called once per frame
-    public void Resume(GameObject menu)
+    private IEnumerator LoadLevelAsinc(int lvl)
     {
-        menu.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void MainMenu(GameObject LoadinBG)
-    {
-        LoadinBG.SetActive(true);
-        Time.timeScale = 1f;
-        StartCoroutine(LoadLevelAsic());
-    }
-
-    private IEnumerator LoadLevelAsic()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(0);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(lvl);
 
         asyncLoad.allowSceneActivation = false;
 
         while (!asyncLoad.isDone)
         {
             progressBar.value = asyncLoad.progress;
-            
+
             if (asyncLoad.progress >= 0.9f && !asyncLoad.allowSceneActivation)
             {
                 text.SetActive(true);
@@ -52,9 +39,9 @@ public class InGameMenu : MonoBehaviour
         }
     }
 
-    public void Exit()
+    // Update is called once per frame
+    void Update()
     {
-        Time.timeScale = 1f;
-        Application.Quit();
+        
     }
 }

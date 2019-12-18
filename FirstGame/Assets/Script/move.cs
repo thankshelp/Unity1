@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class move : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class move : MonoBehaviour
     public Text countText;
     public Text winText;
     public Text LoseText;
+    public int nextlvl = 0;
+    public GameObject loadingScreen;
+    public Slider progressBar;
+    public GameObject text;
+
 
     private Rigidbody rb;
     private int count;
@@ -108,6 +114,34 @@ public class move : MonoBehaviour
         if(count >= objects)
         {
             winText.text = "You Win!";
+
+            loadingScreen.SetActive(true);
+            Time.timeScale = 1f;
+            StartCoroutine(LoadLevelAsinc(nextlvl));
+
+            if (nextlvl > PlayerPrefs.GetInt("curLVL"))
+                PlayerPrefs.SetInt("curLVL", nextlvl);
+        }
+    }
+    private IEnumerator LoadLevelAsinc(int lvl)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(0);
+
+        asyncLoad.allowSceneActivation = false;
+
+        while (!asyncLoad.isDone)
+        {
+            progressBar.value = asyncLoad.progress;
+
+            if (asyncLoad.progress >= 0.9f && !asyncLoad.allowSceneActivation)
+            {
+                text.SetActive(true);
+                progressBar.value = 1.0f;
+
+                if (Input.anyKeyDown)
+                    asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
         }
     }
 }
